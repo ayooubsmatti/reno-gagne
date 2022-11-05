@@ -31,3 +31,12 @@ class Client(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.firstname
+
+
+class DemendeUnAppel(models.Model):
+    name = models.CharField(max_length=200)
+    email =models.EmailField(max_length=254)
+    service = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.service
