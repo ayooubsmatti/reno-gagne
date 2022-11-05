@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 # Create your models here.
 
 class Service(models.Model):
@@ -16,6 +16,7 @@ class Service(models.Model):
        default='interieur',
        null=True, blank=True
    )
+    image = models.ImageField(null= True, default ="service-1.jpg")
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -36,7 +37,11 @@ class Client(models.Model):
 class DemendeUnAppel(models.Model):
     name = models.CharField(max_length=200)
     email =models.EmailField(max_length=254)
-    service = models.CharField(max_length=200)
+    # service = models.ForeignKey(Service,on_delete=models.SET_NULL,null=True)
+    date = models.CharField(max_length=200)
+    time = models.CharField(max_length=200)
+    message = models.TextField(null=True,blank=True)
+    
 
     def __str__(self):
-        return self.service
+        return self.name

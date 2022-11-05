@@ -1,15 +1,17 @@
-from multiprocessing import context
-from pickletools import read_unicodestring1
-from unicodedata import name
 from django.shortcuts import render
+from .forms import DemendeUnAppelForm
 
 from base.models import Service
 
 # Create your views here.
 def home(request):
     services = Service.objects.all()
-    
-    context = {'services':services}
+    form = DemendeUnAppelForm
+    if request.method == 'POST':
+        form = DemendeUnAppelForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'services':services,'form':form}
     return render(request, 'base/home.html',context)
 
 
