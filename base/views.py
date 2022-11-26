@@ -16,8 +16,10 @@ def home(request):
 
 
 def service(request,pk):
-    services = Service.objects.get(id=pk)
-    context = {'services':services}
+    services = Service.objects.all()
+    service = Service.objects.get(id=pk)
+    context = {'services':services ,
+                'service' : service}
     return render(request, 'base/service.html',context)
 
 def about(request):
